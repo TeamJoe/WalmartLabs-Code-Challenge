@@ -17,7 +17,7 @@ cosmos:
 - selects a shuttle
 - adds a cosmonaut to a shuttle for departure
 - updates the shuttle data
-- sends an invite with shuttle depature information to the cosmonaut
+- `console.log`s an invitation with shuttle depature information to the cosmonaut
 
 lots of people want to go to space, but it is not working!
 
