@@ -5,7 +5,7 @@ const shuttleUtil = require('./util/shuttle')
 const cadet = require('./cadet')
 
 const listen = async () => {
-  const shuttleDb = initShuttleDb()
+  const shuttleDb = await initShuttleDb()
   const spaceTravelEmitter = createSpaceTravelEmitter()
   let totalCrewCount = 0
   spaceTravelEmitter.on('space-request', evt => {
@@ -29,8 +29,8 @@ const listen = async () => {
 
 const onSpaceTravelRequested = async ({ shuttleDb, cosmonautId }) => {
   const shuttles = await shuttleDb.read()
-  const availableShuttle = shuttles
-    .find(({ date, capacity }) => date >= 0 && capacity > 0)
+  const availableShuttle = Object.values(shuttles)
+    .find(({ date, remainingCapacity }) => date >= 0 && remainingCapacity > 0)
   if (!availableShuttle) {
     throw new Error(
       `unable to schedule cosmonautId ${cosmonautId}, no shuttles available`
